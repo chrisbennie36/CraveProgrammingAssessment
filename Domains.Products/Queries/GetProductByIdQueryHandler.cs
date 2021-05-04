@@ -16,11 +16,11 @@ namespace Domains.Products.Queries
             _productQueryRepository = productQueryRepository ?? throw new ArgumentNullException(nameof(productQueryRepository));
         }
 
-        public Task<ProductQueryModel> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ProductQueryModel> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
-            var result = _productQueryRepository.GetProductById(request.Id);
+            var result = await _productQueryRepository.GetProductById(request.Id).ConfigureAwait(false);
 
-            return Task.FromResult(result);
+            return result;
         }
     }
 }

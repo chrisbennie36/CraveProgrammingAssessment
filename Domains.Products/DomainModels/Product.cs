@@ -6,15 +6,18 @@ namespace Domains.Products.DomainModels
 {
     public class Product : AggregateRoot
     {
-        public Product(ProductDetails details, bool isActive)
+        public Product(Guid id, ProductDetails details, bool isActive)
         {
-            Id = Guid.NewGuid();
+            Id = id;
             Details = details;
+            _isActive = isActive;
         }
 
         public static Product CreateNew(ProductDetails details, bool isActive)
         {
-            var product = new Product(details, isActive);
+            var id = Guid.NewGuid();
+
+            var product = new Product(id, details, isActive);
 
             product.RegisterEvent(new ProductAddedEvent
             {
@@ -42,13 +45,13 @@ namespace Domains.Products.DomainModels
                 if (value == false && _isActive == true)
                 {
                     _isActive = value;
-                    RegisterEvent(new ProductDeactivatedEvent { Id = Id });
+                    RegisterEvent(new ProductDeactivatedEvent { Id = Id, Type = Details.Type });
                 }
 
                 if (value == true && _isActive == false)
                 {
                     _isActive = value;
-                    RegisterEvent(new ProductActivatedEvent { Id = Id });
+                    RegisterEvent(new ProductActivatedEvent { Id = Id, Type = Details.Type });
                 }
             }
         }

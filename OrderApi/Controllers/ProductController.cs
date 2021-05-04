@@ -58,5 +58,41 @@ namespace OrderingApi.Controllers
             var productId = await _mediator.Send(command, cancellationToken).ConfigureAwait(false);
             return Ok(productId);
         }
+
+        /// <summary>
+        /// Activates an existing Product
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="command"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("activate/{id:Guid}")]
+        public async Task<IActionResult> ActivateProduct(Guid id,
+            CancellationToken cancellationToken)
+        {
+            var command = new ActivateProductCommand { Id = id };
+            await _mediator.Send(command, cancellationToken).ConfigureAwait(false);
+            return Ok();
+        }
+
+        /// <summary>
+        /// Deactivates an existing Product
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="command"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("deactivate/{id:Guid}")]
+        public async Task<IActionResult> DeactivateProduct(Guid id,
+            CancellationToken cancellationToken)
+        {
+            var command = new DeactivateProductCommand { Id = id };
+            await _mediator.Send(command, cancellationToken).ConfigureAwait(false);
+            return Ok();
+        }
     }
 }

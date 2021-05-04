@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Domains.Products.Enums;
+using MediatR;
 using System;
 
 namespace Domains.Products.Events
@@ -6,5 +7,6 @@ namespace Domains.Products.Events
     public class ProductActivatedEvent : INotification
     {
         public Guid Id { get; set; }
+        public ProductType Type { get; set; }
     }
 }

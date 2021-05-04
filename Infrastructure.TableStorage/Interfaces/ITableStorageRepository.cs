@@ -8,9 +8,10 @@ namespace Infrastructure.TableStorage.Interfaces
     public interface ITableStorageRepository
     {
         CloudTableClient GetConnection();
-        Task ExecuteAsync(string tableReference, ITableEntity entity);
-        Task<IEnumerable<T>> QueryAll<T>(string tableReference, T entity) where T : ITableEntity, new();
-        Task<IEnumerable<T>> Query<T>(string tableReference, TableQuery<T> query) where T : ITableEntity, new();
-        T QuerybyId<T>(string tableReference, Guid id) where T : ITableEntity, new();
+        Task InsertAsync(string tableReference, ITableEntity entity);
+        Task UpdateAsync(string tableReference, ITableEntity entity);
+        Task<IEnumerable<T>> QueryAllAsync<T>(string tableReference, T entity) where T : ITableEntity, new();
+        Task<IEnumerable<T>> QueryAsync<T>(string tableReference, TableQuery<T> query) where T : ITableEntity, new();
+        T QuerybyIdAsync<T>(string tableReference, Guid id) where T : ITableEntity, new();
     }
 }

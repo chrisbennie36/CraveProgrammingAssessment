@@ -3,6 +3,7 @@ using Domains.Products.QueryModels;
 using Domains.Products.Repositories.Entities;
 using Infrastructure.TableStorage.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace Domains.Products.Repositories
 {
@@ -17,9 +18,9 @@ namespace Domains.Products.Repositories
             _tableStorageRepository = tableStoragerRepository ?? throw new ArgumentNullException(nameof(tableStoragerRepository));
         }
 
-        public ProductQueryModel GetProductById(Guid productId)
+        public async Task<ProductQueryModel> GetProductById(Guid productId)
         {
-            var result = _tableStorageRepository.QuerybyId<ProductEntity>(TableReference, productId);
+            var result = await Task.Run(() => _tableStorageRepository.QuerybyIdAsync<ProductEntity>(TableReference, productId)).ConfigureAwait(false);
 
             if (result != null)
             {

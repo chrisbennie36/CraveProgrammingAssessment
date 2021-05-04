@@ -6,15 +6,16 @@ namespace Domains.Orders.DomainModels
 {
     public class Order : AggregateRoot
     {
-        public Order(OrderDetails details)
+        public Order(Guid id, OrderDetails details)
         {
-            Id = Guid.NewGuid();
+            Id = id;
             Details = details;
         }
 
         public static Order CreateNew(OrderDetails details)
         {
-            var order = new Order(details);
+            var id = Guid.NewGuid();
+            var order = new Order(id, details);
 
             order.RegisterEvent(new OrderAddedEvent
             {

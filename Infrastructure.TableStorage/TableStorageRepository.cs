@@ -24,7 +24,7 @@ namespace Infrastructure.TableStorage
             return account.CreateCloudTableClient();
         }
 
-        public async Task ExecuteAsync(string tableReference, ITableEntity entity)
+        public async Task InsertAsync(string tableReference, ITableEntity entity)
         {
             var client = GetConnection();
 
@@ -36,7 +36,19 @@ namespace Infrastructure.TableStorage
             await table.ExecuteAsync(tableOperation).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<T>> QueryAll<T>(string tableReference, T entity) where T : ITableEntity, new()
+        public async Task UpdateAsync(string tableReference, ITableEntity entity)
+        {
+            var client = GetConnection();
+
+            var table = client.GetTableReference(tableReference);
+            table.CreateIfNotExists();
+
+            var tableOperation = TableOperation.Replace(entity);
+
+            await table.ExecuteAsync(tableOperation).ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<T>> QueryAllAsync<T>(string tableReference, T entity) where T : ITableEntity, new()
         {
             var client = GetConnection();
 
@@ -54,7 +66,7 @@ namespace Infrastructure.TableStorage
             return entities;
         }
 
-        public async Task<IEnumerable<T>> Query<T>(string tableReference, TableQuery<T> query) where T : ITableEntity, new()
+        public async Task<IEnumerable<T>> QueryAsync<T>(string tableReference, TableQuery<T> query) where T : ITableEntity, new()
         {
             var client = GetConnection();
 
@@ -71,7 +83,7 @@ namespace Infrastructure.TableStorage
             return entities;
         }
 
-        public T QuerybyId<T>(string tableReference, Guid id) where T : ITableEntity, new()
+        public T QuerybyIdAsync<T>(string tableReference, Guid id) where T : ITableEntity, new()
         {
             var client = GetConnection();
             var table = client.GetTableReference(tableReference);

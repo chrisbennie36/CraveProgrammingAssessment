@@ -45,6 +45,12 @@ namespace Domains.Products.Repositories
                         case ProductAddedEvent productAdded:
                             await AddProduct(productAdded).ConfigureAwait(false);
                             break;
+                        case ProductActivatedEvent productActivated:
+                            await ActivateProduct(productActivated).ConfigureAwait(false);
+                            break;
+                        case ProductDeactivatedEvent productDeactivated:
+                            await DeactivateProduct(productDeactivated).ConfigureAwait(false);
+                            break;
                     }
                 }
             }
@@ -69,7 +75,50 @@ namespace Domains.Products.Repositories
                 IsActive = @event.IsActive
             };
 
-            await _tableStorageRepository.ExecuteAsync(TableReference, entity).ConfigureAwait(false);
+            await _tableStorageRepository.InsertAsync(TableReference, entity).ConfigureAwait(false);
+        }
+
+        private async Task ActivateProduct(ProductActivatedEvent @event)
+        {
+            var entity = new ProductEntity
+            {
+                Id = @event.Id,
+                PartitionKey = @event.Type.ToString(),
+                RowKey = @event.Id.ToString(),
+                Timestamp = DateTime.UtcNow,
+                IsActive = true,
+                ETag = "*"
+            };
+
+            await _tableStorageRepository.UpdateAsync(TableReference, entity).ConfigureAwait(false);
+        }
+
+        private async Task DeactivateProduct(ProductDeactivatedEvent @event)
+        {
+            var entity = new ProductEntity
+            {
+                Id = @event.Id,
+                PartitionKey = @event.Type.ToString(),
+                RowKey = @event.Id.ToString(),
+                Timestamp = DateTime.UtcNow,
+                IsActive = false,
+                ETag = "*"
+            };
+
+            await _tableStorageRepository.UpdateAsync(TableReference, entity).ConfigureAwait(false);
+        }
+
+        public async Task<Product> GetProductById(Guid id)
+        {
+            var result = await Task.Run(() => _tableStorageRepository.QuerybyIdAsync<ProductEntity>(TableReference, id)).ConfigureAwait(false);
+
+            if (result != null)
+            {
+                var productDetails = new ProductDetails(result.Name, result.Type);
+                return new Product(result.Id, productDetails, result.IsActive);
+            }
+
+            return null;
         }
     }
 }

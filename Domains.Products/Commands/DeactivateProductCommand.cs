@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
+using System;
 
 namespace Domains.Products.Commands
 {
-    class DeactivateProductCommand
+    public class DeactivateProductCommand : IRequest<Unit>
     {
+        public Guid Id { get; set; }
     }
 }
