@@ -1,7 +1,9 @@
 using Domains.Orders.Interfaces;
 using Domains.Orders.Repositories;
+using Domains.Orders.Validation;
 using Domains.Products.Interfaces;
 using Domains.Products.Repositories;
+using FluentValidation.AspNetCore;
 using Infrastructure.EventPublisher;
 using Infrastructure.EventPublisher.Interfaces;
 using Infrastructure.RepositoryConfiguration;
@@ -46,7 +48,7 @@ namespace OrderApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRouting();
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<PlaceOrdersCommandValidator>());
 
             services.AddSwaggerExamples();
 
@@ -66,6 +68,7 @@ namespace OrderApi
 
             services.AddTransient<IOrderCommandRepository, OrderCommandRepository>();
             services.AddTransient<IOrderQueryRepository, OrderQueryRepository>();
+            services.AddTransient<IProductIdsQueryRepository, ProductIdsQueryRepository>();
 
             services.AddTransient<IProductCommandRepository, ProductCommandRepository>();
             services.AddTransient<IProductQueryRepository, ProductQueryRepository>();

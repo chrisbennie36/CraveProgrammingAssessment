@@ -6,6 +6,7 @@ namespace Domains.Orders.Interfaces
 {
     public interface IProductIdsQueryRepository
     {
-        Task<IEnumerable<Guid>> GetProductIds();
+        Task<IEnumerable<Guid>> GetAllProductIds();
+        Task<IEnumerable<Guid>> GetActiveProductIds();
     }
 }

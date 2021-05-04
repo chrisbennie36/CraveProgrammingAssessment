@@ -48,7 +48,7 @@ namespace Infrastructure.TableStorage
             await table.ExecuteAsync(tableOperation).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<T>> QueryAllAsync<T>(string tableReference, T entity) where T : ITableEntity, new()
+        public async Task<IEnumerable<T>> QueryAllAsync<T>(string tableReference) where T : ITableEntity, new()
         {
             var client = GetConnection();
 

@@ -82,6 +82,11 @@ namespace OrderingApi.Controllers
         public async Task<IActionResult> AddOrders([FromBody, Required] PlaceOrdersCommand command,
             CancellationToken cancellationToken)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var orderIds = await _mediator.Send(command, cancellationToken).ConfigureAwait(false);
             return Ok(orderIds);
         }

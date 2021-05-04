@@ -5,14 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="10.1.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.1.0" />
     <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="1.0.8" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure.AggregateRoot\Infrastructure.Aggregate.csproj" />
     <ProjectReference Include="..\Infrastructure.EventPublisher\Infrastructure.EventPublisher.csproj" />
     <ProjectReference Include="..\Infrastructure.Sql\Infrastructure.Sql.csproj" />
+    <ProjectReference Include="..\Infrastructure.TableStorage\Infrastructure.TableStorage.csproj" />
     <ProjectReference Include="..\Infrastrucure.Exceptions\Infrastrucure.Exceptions.csproj" />
     <ProjectReference Include="..\Logger\Infrastructure.Logging.csproj" />
   </ItemGroup>
