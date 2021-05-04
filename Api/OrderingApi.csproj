@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>CraveOrderingMicroservice.Api.OrderingApi</AssemblyName>
+    <RootNamespace>CraveOrderingMicroservice.Api.OrderingApi</RootNamespace>
+  </PropertyGroup>
+
+</Project>
