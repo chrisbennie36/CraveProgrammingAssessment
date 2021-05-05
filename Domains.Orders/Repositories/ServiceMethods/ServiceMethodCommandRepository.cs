@@ -1,6 +1,7 @@
-﻿using Domains.Orders.DomainModels;
-using Domains.Orders.Events;
-using Domains.Orders.Interfaces;
+﻿using Domains.Orders.DomainModels.ServiceMethods;
+using Domains.Orders.Events.ServiceMethods;
+using Domains.Orders.Interfaces.ServiceMethods;
+using Domains.Orders.QueryModels.ServiceMethods;
 using Infrastructure.Sql.Interfaces;
 using Logging.Interfaces;
 using MediatR;
@@ -11,9 +12,10 @@ using System.Threading.Tasks;
 
 namespace Domains.Orders.Repositories
 {
-    public class OrderCommandRepository : IOrderCommandRepository
+    public class ServiceMethodCommandRepository : IServiceMethodCommandRepository
     {
-        private const string AddOrdersProcedure = "spAddOrders";
+        private const string AddServiceMethodProcedure = "spAddServiceMethod";
+        private const string GetServiceMethodIdsProcedure = "spGetServiceMethodIds";
 
         private IDbConnection _connection = null;
         private IDbTransaction _transaction = null;
@@ -21,20 +23,20 @@ namespace Domains.Orders.Repositories
         private readonly ISqlRepository _sqlRepository;
         private readonly ILogger _logger;
 
-        public OrderCommandRepository(ISqlRepository sqlRepository, ILogger logger)
+        public ServiceMethodCommandRepository(ISqlRepository sqlRepository, ILogger logger)
         {
             _sqlRepository = sqlRepository ?? throw new ArgumentNullException(nameof(sqlRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task Store(Order order)
+        public async Task Store(ServiceMethod serviceMethod)
         {
-            if (!order.HasChanges())
+            if (!serviceMethod.HasChanges())
             {
                 return;
             }
 
-            await DispatchEvents(order.PendingChanges).ConfigureAwait(false);
+            await DispatchEvents(serviceMethod.PendingChanges).ConfigureAwait(false);
         }
 
         private async Task DispatchEvents(IReadOnlyList<INotification> events)
@@ -51,8 +53,8 @@ namespace Domains.Orders.Repositories
                         {
                             switch (@event)
                             {
-                                case OrderAddedEvent orderAdded:
-                                    await AddOrder(orderAdded).ConfigureAwait(false);
+                                case ServiceMethodAddedEvent serviceMethodAdded:
+                                    await AddServiceMethod(serviceMethodAdded).ConfigureAwait(false);
                                     break;
                             }
                         }
@@ -71,18 +73,22 @@ namespace Domains.Orders.Repositories
             }
         }
 
-        private async Task AddOrder(OrderAddedEvent @event)
+        private async Task AddServiceMethod(ServiceMethodAddedEvent @event)
         {
-            await _sqlRepository.ExecuteAsync(AddOrdersProcedure, new
+            await _sqlRepository.ExecuteAsync(AddServiceMethodProcedure, new
             {
                 Id = @event.Id,
-                ProductId = @event.ProductId,
-                ServiceMethodId = @event.ServiceMethodId,
-                AdditionalInstructions = @event.AdditionalInstructions,
-                CustomerName = @event.CustomerName,
-                CustomerPhoneNumber = @event.CustomerPhoneNumber,
-                CustomerEmail = @event.CustomerEmail
+                Name = @event.Name
             }).ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<Guid>> GetServiceMethodIds()
+        {
+            var result = await _sqlRepository.QueryAsync<Guid>(GetServiceMethodIdsProcedure, new
+            {
+            }).ConfigureAwait(false);
+
+            return result ?? new List<Guid>();
         }
     }
 }

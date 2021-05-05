@@ -1,5 +1,7 @@
 using Domains.Orders.Interfaces;
+using Domains.Orders.Interfaces.ServiceMethods;
 using Domains.Orders.Repositories;
+using Domains.Orders.Repositories.ServiceMethods;
 using Domains.Orders.Validation;
 using Domains.Products.Interfaces;
 using Domains.Products.Repositories;
@@ -20,6 +22,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Converters;
 using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Collections.Generic;
@@ -48,14 +51,19 @@ namespace OrderApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRouting();
-            services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<PlaceOrdersCommandValidator>());
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<PlaceOrdersCommandValidator>())
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                });
 
             services.AddSwaggerExamples();
 
             services.AddSwaggerGen(c => 
             {
                 c.ExampleFilters();
-            });
+            }).AddSwaggerGenNewtonsoftSupport();
 
             services.Configure<LoggerConfiguration>(Configuration.GetSection("LoggerConfiguration"));
             services.Configure<ConnectionStringsConfiguration>(Configuration.GetSection("ConnectionStrings"));
@@ -68,10 +76,12 @@ namespace OrderApi
 
             services.AddTransient<IOrderCommandRepository, OrderCommandRepository>();
             services.AddTransient<IOrderQueryRepository, OrderQueryRepository>();
-            services.AddTransient<IProductIdsQueryRepository, ProductIdsQueryRepository>();
 
             services.AddTransient<IProductCommandRepository, ProductCommandRepository>();
             services.AddTransient<IProductQueryRepository, ProductQueryRepository>();
+
+            services.AddTransient<IServiceMethodCommandRepository, ServiceMethodCommandRepository>();
+            services.AddTransient<IServiceMethodQueryRepository, ServiceMethodQueryRepository>();
 
             services.AddSingleton(typeof(IEventPublisher<INotification>), typeof(EventPublisher));
             services.AddSingleton(typeof(IQueue<INotification>), typeof(Infrastructure.EventPublisher.Queue<INotification>));

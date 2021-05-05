@@ -33,11 +33,9 @@ namespace Infrastructure.Sql
                     await connection.ExecuteAsync(command, args, commandType: CommandType.StoredProcedure).ConfigureAwait(false);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                ex.Data["Command"] = command;
-                ex.Data["Arguments"] = args == null ? string.Empty : args.ToString();
-                throw;
+                throw ex;
             }
         }
 
@@ -50,11 +48,9 @@ namespace Infrastructure.Sql
                     return await connection.QueryAsync<TResult>(command, args, commandType: CommandType.StoredProcedure).ConfigureAwait(false);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                ex.Data["Command"] = command;
-                ex.Data["Arguments"] = args == null ? string.Empty : args.ToString();
-                throw;
+                throw ex;
             }
         }
     }

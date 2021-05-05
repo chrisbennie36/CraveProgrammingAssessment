@@ -1,10 +1,7 @@
 ﻿using Domains.Orders.Commands;
 using Domains.Orders.Queries;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OrderingApi.SwashbuckleExamples;
-using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,7 +11,6 @@ using System.Threading.Tasks;
 namespace OrderingApi.Controllers
 {
     [Route("api/[controller]")]
-    //[Authorize(AuthenticationSchemes = "Hmac")]
     public class OrderController : ControllerBase
     {
         private readonly IMediator _mediator;

@@ -1,4 +1,5 @@
-﻿using Domains.Products.Commands;
+﻿using Domains.Orders.Queries.Products;
+using Domains.Products.Commands;
 using Domains.Products.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,11 @@ namespace OrderingApi.Controllers
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
-        //[Authorize(AuthenticationSchemes = "Hmac")]
-
         private readonly IMediator _mediator;
 
         public ProductController(IMediator mediator)
         {
-            _mediator = mediator;
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
         /// <summary>
@@ -36,6 +35,24 @@ namespace OrderingApi.Controllers
             };
 
             var result = await _mediator.Send(getProductQuery, new CancellationToken()).ConfigureAwait(false);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Retrieves all Products
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> GetProducts()
+        {
+            var getProductsQuery = new GetProductsQuery();
+
+            var result = await _mediator.Send(getProductsQuery, new CancellationToken()).ConfigureAwait(false);
 
             if (result == null)
                 return NotFound();

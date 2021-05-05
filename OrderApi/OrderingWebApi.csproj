@@ -13,13 +13,13 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="SimpleSoft.Mediator.Microsoft.Extensions.ValidationPipeline" Version="2.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.1.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Domains.Orders\Domains.Orders.csproj" />
-    <ProjectReference Include="..\Domains.Products\Domains.Products.csproj" />
     <ProjectReference Include="..\Infrastructure.RepositoryConfiguration\Infrastructure.RepositoryConfiguration.csproj" />
     <ProjectReference Include="..\Infrastructure.TableStorage\Infrastructure.TableStorage.csproj" />
     <ProjectReference Include="..\Logger\Infrastructure.Logging.csproj" />

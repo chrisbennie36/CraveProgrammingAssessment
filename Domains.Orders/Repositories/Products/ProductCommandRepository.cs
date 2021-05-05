@@ -1,12 +1,14 @@
-﻿using Domains.Products.DomainModels;
+﻿using Domains.Orders.Repositories.Entities;
+using Domains.Products.DomainModels;
 using Domains.Products.Events;
 using Domains.Products.Interfaces;
-using Domains.Products.Repositories.Entities;
 using Infrastructure.TableStorage.Interfaces;
 using Logging.Interfaces;
 using MediatR;
+using Microsoft.Azure.Cosmos.Table;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Domains.Products.Repositories
@@ -32,6 +34,46 @@ namespace Domains.Products.Repositories
             }
 
             await DispatchEvents(product.PendingChanges).ConfigureAwait(false);
+        }
+
+        public async Task<Product> GetProductById(Guid id)
+        {
+            var result = await Task.Run(() => _tableStorageRepository.QuerybyIdAsync<ProductEntity>(TableReference, id)).ConfigureAwait(false);
+
+            if (result != null)
+            {
+                var productDetails = new ProductDetails(result.Name, result.Type);
+                return new Product(result.Id, productDetails, result.IsActive);
+            }
+
+            return null;
+        }
+
+        public async Task<IEnumerable<Guid>> GetActiveProductIds()
+        {
+            var condition = TableQuery.GenerateFilterConditionForBool("IsActive", QueryComparisons.Equal, true);
+            var query = new TableQuery<ProductEntity>().Where(condition);
+
+            var result = await Task.Run(() => _tableStorageRepository.QueryAsync(TableReference, query)).ConfigureAwait(false);
+
+            if (result != null)
+            {
+                return result.Select(result => result.Id);
+            }
+
+            return new List<Guid>();
+        }
+
+        public async Task<IEnumerable<Guid>> GetProductIds()
+        {
+            var result = await Task.Run(() => _tableStorageRepository.QueryAllAsync<ProductEntity>(TableReference)).ConfigureAwait(false);
+
+            if (result != null)
+            {
+                return result.Select(result => result.Id);
+            }
+
+            return new List<Guid>();
         }
 
         private async Task DispatchEvents(IReadOnlyList<INotification> events)
@@ -106,19 +148,6 @@ namespace Domains.Products.Repositories
             };
 
             await _tableStorageRepository.UpdateAsync(TableReference, entity).ConfigureAwait(false);
-        }
-
-        public async Task<Product> GetProductById(Guid id)
-        {
-            var result = await Task.Run(() => _tableStorageRepository.QuerybyIdAsync<ProductEntity>(TableReference, id)).ConfigureAwait(false);
-
-            if (result != null)
-            {
-                var productDetails = new ProductDetails(result.Name, result.Type);
-                return new Product(result.Id, productDetails, result.IsActive);
-            }
-
-            return null;
         }
     }
 }

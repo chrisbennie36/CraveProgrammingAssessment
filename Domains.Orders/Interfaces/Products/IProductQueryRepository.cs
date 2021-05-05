@@ -1,11 +1,13 @@
 ﻿using Domains.Products.QueryModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Domains.Products.Interfaces
 {
     public interface IProductQueryRepository
     {
-        public Task<ProductQueryModel> GetProductById(Guid orderId);
+        Task<ProductQueryModel> GetProductById(Guid orderId);
+        Task<IEnumerable<ProductQueryModel>> GetAllProducts();
     }
 }

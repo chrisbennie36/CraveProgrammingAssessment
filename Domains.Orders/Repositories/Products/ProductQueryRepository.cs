@@ -1,8 +1,10 @@
-﻿using Domains.Products.Interfaces;
+﻿using Domains.Orders.Repositories.Entities;
+using Domains.Products.Interfaces;
 using Domains.Products.QueryModels;
-using Domains.Products.Repositories.Entities;
 using Infrastructure.TableStorage.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Domains.Products.Repositories
@@ -34,6 +36,23 @@ namespace Domains.Products.Repositories
             }
 
             return null;
+        }
+        public async Task<IEnumerable<ProductQueryModel>> GetAllProducts()
+        {
+            var result = await Task.Run(() => _tableStorageRepository.QueryAllAsync<ProductEntity>(TableReference)).ConfigureAwait(false);
+
+            if (result != null)
+            {
+                return result.Select(r => new ProductQueryModel
+                {
+                    Id = r.Id,
+                    IsActive = r.IsActive,
+                    Name = r.Name,
+                    Type = r.Type
+                });
+            }
+
+            return new List<ProductQueryModel>();
         }
     }
 }
