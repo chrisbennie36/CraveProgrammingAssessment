@@ -78,7 +78,8 @@ namespace Domains.Ordering.Repositories.Orders
                 Id = @event.Id,
                 ProductId = @event.ProductId,
                 ServiceMethodId = @event.ServiceMethodId,
-                AdditionalModifiers = @event.AdditionalModifiers,
+                Additions = @event.Additions,
+                PreparationMethod = @event.PreparationMethod,
                 CustomerName = @event.CustomerName,
                 CustomerPhoneNumber = @event.CustomerPhoneNumber,
                 CustomerEmail = @event.CustomerEmail

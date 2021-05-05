@@ -1,5 +1,6 @@
 ﻿using Domains.Ordering.Interfaces.Orders;
 using Domains.Ordering.QueryModels.Orders;
+using Domains.Ordering.Repositories.Orders.Models;
 using Infrastructure.Sql.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,9 @@ namespace Domains.Ordering.Repositories.Orders
             _sqlRepository = sqlRepository ?? throw new ArgumentNullException(nameof(sqlRepository));
         }
 
-        public async Task<OrderQueryModel> GetOrderById(Guid orderId)
+        public async Task<OrderModel> GetOrderById(Guid orderId)
         {
-            var result = await _sqlRepository.QueryAsync<OrderQueryModel>(GetOrderProcedure, new
+            var result = await _sqlRepository.QueryAsync<OrderModel>(GetOrderProcedure, new
             {
                 orderId = orderId
             }).ConfigureAwait(false);
@@ -30,14 +31,14 @@ namespace Domains.Ordering.Repositories.Orders
             return result.FirstOrDefault();
         }
 
-        public async Task<IEnumerable<OrderQueryModel>> GetOrdersByFilter(string filter)
+        public async Task<IEnumerable<OrderModel>> GetOrdersByFilter(string filter)
         {
-            var result = await _sqlRepository.QueryAsync<OrderQueryModel>(GetOrdersProcedure, new
+            var result = await _sqlRepository.QueryAsync<OrderModel>(GetOrdersProcedure, new
             {
                 filter = filter
             }).ConfigureAwait(false);
 
-            return result ?? new List<OrderQueryModel>();
+            return result ?? new List<OrderModel>();
         }
     }
 }

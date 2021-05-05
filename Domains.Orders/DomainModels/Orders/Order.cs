@@ -25,7 +25,8 @@ namespace Domains.Ordering.DomainModels.Orders
                 CustomerName = order.Details.CustomerName,
                 CustomerPhoneNumber = order.Details.CustomerPhoneNumber,
                 CustomerEmail = order.Details.CustomerEmail,
-                AdditionalModifiers = order.Details.AdditionalModifiers
+                Additions = order.Details.AdditionalModifiers?.Additions,
+                PreparationMethod = order.Details.AdditionalModifiers?.PreparationMethod
             });
 
             return order;

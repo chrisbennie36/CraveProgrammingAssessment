@@ -1,6 +1,6 @@
 ﻿using Domains.Ordering.Commands.Orders;
+using Domains.Ordering.Dtos.Ordering;
 using Domains.Ordering.Dtos.Orders;
-using Newtonsoft.Json.Linq;
 using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Collections.Generic;
@@ -25,11 +25,11 @@ namespace OrderingApi.SwashbuckleExamples
                     {
                         ProductId = Guid.NewGuid(),
                         ServiceMethodId = Guid.NewGuid(),
-                        AdditionalModifiers = JObject.FromObject(new
+                        AdditionalModifiers = new AdditionalModifiersDto
                         {
-                            additions = 1,
-                            preparationMethod = "rare"
-                        })
+                            Additions = 1,
+                            PreparationMethod = "Rare"
+                        }
                     }
                 }
             };

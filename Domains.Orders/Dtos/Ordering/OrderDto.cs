@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Domains.Ordering.Dtos.Ordering;
 using System;
 
 namespace Domains.Ordering.Dtos.Orders
@@ -7,6 +7,6 @@ namespace Domains.Ordering.Dtos.Orders
     {
         public Guid ProductId { get; set; }
         public Guid ServiceMethodId { get; set; }
-        public JObject AdditionalModifiers { get; set; }
+        public AdditionalModifiersDto AdditionalModifiers { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Domains.Ordering.Interfaces.Orders;
 using Domains.Ordering.Queries.Orders;
-using Domains.Ordering.QueryModels.Orders;
+using Domains.Ordering.Repositories.Orders.Models;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -36,7 +36,7 @@ namespace Domains.Ordering.UnitTests.Queries.Orders
         {
             var query = new GetOrdersByFilterQuery { Filter = "UnitTest" };
 
-            _orderRepository.Setup(o => o.GetOrdersByFilter(query.Filter)).ReturnsAsync(new List<OrderQueryModel>());
+            _orderRepository.Setup(o => o.GetOrdersByFilter(query.Filter)).ReturnsAsync(new List<OrderModel>());
 
             var result = await _handler.Handle(query, new CancellationToken()).ConfigureAwait(false);
 

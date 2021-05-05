@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Domains.Ordering.Dtos.Ordering;
 using System;
 
 namespace Domains.Ordering.DomainModels.Orders
@@ -11,7 +11,7 @@ namespace Domains.Ordering.DomainModels.Orders
             string customerName,
             string customerPhoneNumber,
             string customerEmail,
-            JObject additionalModifiers)
+            AdditionalModifiersDto additionalModifiers)
         {
             ProductId = productId;
             CustomerName = customerName;
@@ -26,6 +26,6 @@ namespace Domains.Ordering.DomainModels.Orders
         public string CustomerName { get; }
         public string CustomerPhoneNumber { get; }
         public string CustomerEmail { get; }
-        public JObject AdditionalModifiers { get; set; }
+        public AdditionalModifiersDto AdditionalModifiers { get; set; }
     }
 }
