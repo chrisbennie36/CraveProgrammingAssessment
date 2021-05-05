@@ -1,8 +1,8 @@
-﻿using Domains.Orders.QueryModels.ServiceMethods;
+﻿using Domains.Ordering.QueryModels.ServiceMethods;
 using MediatR;
 using System.Collections.Generic;
 
-namespace Domains.Orders.Queries.ServiceMethods
+namespace Domains.Ordering.Queries.ServiceMethods
 {
     public class GetServiceMethodsQuery : IRequest<IEnumerable<ServiceMethodQueryModel>>
     {

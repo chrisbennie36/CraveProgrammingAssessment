@@ -1,9 +1,11 @@
-﻿using Domains.Orders.Queries.Products;
-using Domains.Products.Commands;
-using Domains.Products.Queries;
+﻿using Domains.Ordering.Commands.Products;
+using Domains.Ordering.Queries.Products;
+using Domains.Ordering.QueryModels.Products;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,6 +29,8 @@ namespace OrderingApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{id:Guid}", Name = "GetProduct")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductQueryModel))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetProduct(Guid id)
         {
             var getProductQuery = new GetProductByIdQuery
@@ -48,6 +52,8 @@ namespace OrderingApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ProductQueryModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetProducts()
         {
             var getProductsQuery = new GetProductsQuery();
@@ -69,11 +75,18 @@ namespace OrderingApi.Controllers
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
+        [Route("")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Guid))]
         public async Task<IActionResult> AddProduct([FromBody, Required] AddProductCommand command,
             CancellationToken cancellationToken)
         {
+            if (command == null)
+            {
+                return BadRequest();
+            }
+
             var productId = await _mediator.Send(command, cancellationToken).ConfigureAwait(false);
-            return Ok(productId);
+            return CreatedAtRoute("GetProduct", new { id = productId }, productId);
         }
 
         /// <summary>
@@ -86,6 +99,7 @@ namespace OrderingApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("activate/{id:Guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> ActivateProduct(Guid id,
             CancellationToken cancellationToken)
         {
@@ -104,6 +118,7 @@ namespace OrderingApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("deactivate/{id:Guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> DeactivateProduct(Guid id,
             CancellationToken cancellationToken)
         {

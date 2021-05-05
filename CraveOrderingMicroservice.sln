@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domains.Orders", "Domains.Orders\Domains.Orders.csproj", "{47D1FA05-9964-4149-BC17-A48844C6B6AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domains.Ordering", "Domains.Orders\Domains.Ordering.csproj", "{47D1FA05-9964-4149-BC17-A48844C6B6AE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderingWebApi", "OrderApi\OrderingWebApi.csproj", "{F2FABC28-798F-4BFC-B4FB-01B484659495}"
 EndProject
@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Sql", "Infra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.TableStorage", "Infrastructure.TableStorage\Infrastructure.TableStorage.csproj", "{FA756D4D-90DE-46D5-9D91-88E77533D2F5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domains.Orders.UnitTests", "Domains.Orders.UnitTests\Domains.Orders.UnitTests.csproj", "{329F3497-2852-4760-8600-598D1345BF0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domains.Ordering.UnitTests", "Domains.Orders.UnitTests\Domains.Ordering.UnitTests.csproj", "{329F3497-2852-4760-8600-598D1345BF0C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.RepositoryConfiguration", "Infrastructure.RepositoryConfiguration\Infrastructure.RepositoryConfiguration.csproj", "{025B8C51-4496-41CE-95DA-F586A407CCB2}"
 EndProject

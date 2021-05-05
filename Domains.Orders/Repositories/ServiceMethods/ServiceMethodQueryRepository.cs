@@ -1,9 +1,8 @@
-﻿using Domains.Orders.Interfaces.ServiceMethods;
-using Domains.Orders.QueryModels.ServiceMethods;
+﻿using Domains.Ordering.Interfaces.ServiceMethods;
+using Domains.Ordering.QueryModels.ServiceMethods;
 using Infrastructure.Sql.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Domains.Orders.Repositories.ServiceMethods

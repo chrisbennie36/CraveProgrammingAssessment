@@ -1,8 +1,8 @@
-﻿using Domains.Products.Events;
+﻿using Domains.Ordering.Events.Products;
 using Infrastructure.Aggregate.AggregateRoot;
 using System;
 
-namespace Domains.Products.DomainModels
+namespace Domains.Ordering.DomainModels.Products
 {
     public class Product : AggregateRoot
     {

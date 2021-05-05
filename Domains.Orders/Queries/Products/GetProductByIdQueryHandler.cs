@@ -1,11 +1,11 @@
-﻿using Domains.Products.Interfaces;
-using Domains.Products.QueryModels;
+﻿using Domains.Ordering.Interfaces.Products;
+using Domains.Ordering.QueryModels.Products;
 using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Domains.Products.Queries
+namespace Domains.Ordering.Queries.Products
 {
     public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, ProductQueryModel>
     {

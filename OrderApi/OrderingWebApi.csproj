@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domains.Orders\Domains.Orders.csproj" />
+    <ProjectReference Include="..\Domains.Orders\Domains.Ordering.csproj" />
     <ProjectReference Include="..\Infrastructure.RepositoryConfiguration\Infrastructure.RepositoryConfiguration.csproj" />
     <ProjectReference Include="..\Infrastructure.TableStorage\Infrastructure.TableStorage.csproj" />
     <ProjectReference Include="..\Logger\Infrastructure.Logging.csproj" />

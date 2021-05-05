@@ -1,5 +1,5 @@
-﻿using Domains.Products.DomainModels;
-using Domains.Products.Interfaces;
+﻿using Domains.Ordering.DomainModels.Products;
+using Domains.Ordering.Interfaces.Products;
 using Infrastructure.EventPublisher.Interfaces;
 using Logging.Interfaces;
 using MediatR;
@@ -7,7 +7,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Domains.Products.Commands
+namespace Domains.Ordering.Commands.Products
 {
     public class AddProductCommandHandler : IRequestHandler<AddProductCommand, Guid>
     {

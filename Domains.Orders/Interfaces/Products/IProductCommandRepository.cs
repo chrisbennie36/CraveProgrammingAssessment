@@ -1,9 +1,9 @@
-﻿using Domains.Products.DomainModels;
+﻿using Domains.Ordering.DomainModels.Products;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Domains.Products.Interfaces
+namespace Domains.Ordering.Interfaces.Products
 {
     public interface IProductCommandRepository
     {

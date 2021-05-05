@@ -1,4 +1,5 @@
-﻿using Domains.Products.Commands;
+﻿using Domains.Ordering.Commands.Products;
+using Domains.Ordering.Enums.Products;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace OrderingApi.SwashbuckleExamples.Products
@@ -9,8 +10,9 @@ namespace OrderingApi.SwashbuckleExamples.Products
         {
             return new AddProductCommand
             {
-                Name = Domains.Products.Enums.ProductName.Dinner,
-                Type = Domains.Products.Enums.ProductType.Food
+                //Name = ProductName.Dinner,
+                Name = "Test",
+                Type = ProductType.Food
             };
         }
     }

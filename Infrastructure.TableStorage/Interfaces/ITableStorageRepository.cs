@@ -12,6 +12,6 @@ namespace Infrastructure.TableStorage.Interfaces
         Task UpdateAsync(string tableReference, ITableEntity entity);
         Task<IEnumerable<T>> QueryAllAsync<T>(string tableReference) where T : ITableEntity, new();
         Task<IEnumerable<T>> QueryAsync<T>(string tableReference, TableQuery<T> query) where T : ITableEntity, new();
-        T QuerybyIdAsync<T>(string tableReference, Guid id) where T : ITableEntity, new();
+        Task<T> QuerybyIdAsync<T>(string tableReference, Guid id) where T : ITableEntity, new();
     }
 }

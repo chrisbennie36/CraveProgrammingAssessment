@@ -1,7 +1,7 @@
-﻿using Domains.Orders.Repositories.Entities;
-using Domains.Products.DomainModels;
-using Domains.Products.Events;
-using Domains.Products.Interfaces;
+﻿using Domains.Ordering.DomainModels.Products;
+using Domains.Ordering.Events.Products;
+using Domains.Ordering.Interfaces.Products;
+using Domains.Ordering.Repositories.Products.Entities;
 using Infrastructure.TableStorage.Interfaces;
 using Logging.Interfaces;
 using MediatR;
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Domains.Products.Repositories
+namespace Domains.Ordering.Repositories.Products
 {
     public class ProductCommandRepository : IProductCommandRepository
     {

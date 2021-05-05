@@ -1,11 +1,7 @@
-﻿using MediatR;
-using System;
-
-namespace Domains.Orders.Events.ServiceMethods
+﻿namespace Domains.Ordering.Events.ServiceMethods
 {
-    public class ServiceMethodAddedEvent : INotification
+    public class ServiceMethodAddedEvent : BaseEvent
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
     }
 }

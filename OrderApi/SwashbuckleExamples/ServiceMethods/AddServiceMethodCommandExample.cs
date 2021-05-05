@@ -1,4 +1,4 @@
-﻿using Domains.Orders.Commands.ServiceMethods;
+﻿using Domains.Ordering.Commands.ServiceMethods;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace OrderingApi.SwashbuckleExamples.Products

@@ -1,12 +1,12 @@
-﻿using Domains.Orders.Interfaces.ServiceMethods;
-using Domains.Orders.QueryModels.ServiceMethods;
+﻿using Domains.Ordering.Interfaces.ServiceMethods;
+using Domains.Ordering.QueryModels.ServiceMethods;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Domains.Orders.Queries.ServiceMethods
+namespace Domains.Ordering.Queries.ServiceMethods
 {
     public class GetServiceMethodsQueryHandler : IRequestHandler<GetServiceMethodsQuery, IEnumerable<ServiceMethodQueryModel>>
     {

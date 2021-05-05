@@ -1,8 +1,8 @@
-﻿using Domains.Orders.QueryModels.ServiceMethods;
+﻿using Domains.Ordering.QueryModels.ServiceMethods;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Domains.Orders.Interfaces.ServiceMethods
+namespace Domains.Ordering.Interfaces.ServiceMethods
 {
     public interface IServiceMethodQueryRepository
     {

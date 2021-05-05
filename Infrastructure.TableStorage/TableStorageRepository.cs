@@ -83,7 +83,7 @@ namespace Infrastructure.TableStorage
             return entities;
         }
 
-        public T QuerybyIdAsync<T>(string tableReference, Guid id) where T : ITableEntity, new()
+        public async Task<T> QuerybyIdAsync<T>(string tableReference, Guid id) where T : ITableEntity, new()
         {
             var client = GetConnection();
             var table = client.GetTableReference(tableReference);
@@ -91,7 +91,7 @@ namespace Infrastructure.TableStorage
             var condition = TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, id.ToString());
             var query = new TableQuery<T>().Where(condition);
 
-            var result = table.ExecuteQuery(query);
+            var result = await Task.Run(() => table.ExecuteQuery(query)).ConfigureAwait(false);
 
             return result.FirstOrDefault();
         }

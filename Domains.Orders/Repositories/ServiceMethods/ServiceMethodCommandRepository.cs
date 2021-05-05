@@ -1,7 +1,6 @@
-﻿using Domains.Orders.DomainModels.ServiceMethods;
-using Domains.Orders.Events.ServiceMethods;
-using Domains.Orders.Interfaces.ServiceMethods;
-using Domains.Orders.QueryModels.ServiceMethods;
+﻿using Domains.Ordering.DomainModels.ServiceMethods;
+using Domains.Ordering.Events.ServiceMethods;
+using Domains.Ordering.Interfaces.ServiceMethods;
 using Infrastructure.Sql.Interfaces;
 using Logging.Interfaces;
 using MediatR;
@@ -10,7 +9,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace Domains.Orders.Repositories
+namespace Domains.Ordering.Repositories.ServiceMethods
 {
     public class ServiceMethodCommandRepository : IServiceMethodCommandRepository
     {

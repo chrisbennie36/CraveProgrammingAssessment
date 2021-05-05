@@ -1,4 +1,4 @@
-﻿using Domains.Products.Interfaces;
+﻿using Domains.Ordering.Interfaces.Products;
 using Infrastructure.EventPublisher.Interfaces;
 using Logging.Interfaces;
 using MediatR;
@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Domains.Products.Commands
+namespace Domains.Ordering.Commands.Products
 {
     public class DeactivateProductCommandHandler : IRequestHandler<DeactivateProductCommand, Unit>
     {

@@ -1,5 +1,5 @@
-﻿using Domains.Orders.DomainModels.ServiceMethods;
-using Domains.Orders.Interfaces.ServiceMethods;
+﻿using Domains.Ordering.DomainModels.ServiceMethods;
+using Domains.Ordering.Interfaces.ServiceMethods;
 using Infrastructure.EventPublisher.Interfaces;
 using Logging.Interfaces;
 using MediatR;
@@ -7,7 +7,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Domains.Orders.Commands.ServiceMethods
+namespace Domains.Ordering.Commands.ServiceMethods
 {
     public class AddServiceMethodCommandHandler : IRequestHandler<AddServiceMethodCommand, Guid>
     {

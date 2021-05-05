@@ -1,13 +1,13 @@
-﻿using Domains.Orders.Repositories.Entities;
-using Domains.Products.Interfaces;
-using Domains.Products.QueryModels;
+﻿using Domains.Ordering.Interfaces.Products;
+using Domains.Ordering.QueryModels.Products;
+using Domains.Ordering.Repositories.Products.Entities;
 using Infrastructure.TableStorage.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Domains.Products.Repositories
+namespace Domains.Ordering.Repositories.Products
 {
     public class ProductQueryRepository : IProductQueryRepository
     {

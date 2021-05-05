@@ -1,8 +1,8 @@
-﻿using Domains.Orders.Events.ServiceMethods;
+﻿using Domains.Ordering.Events.ServiceMethods;
 using Infrastructure.Aggregate.AggregateRoot;
 using System;
 
-namespace Domains.Orders.DomainModels.ServiceMethods
+namespace Domains.Ordering.DomainModels.ServiceMethods
 {
     public class ServiceMethod : AggregateRoot
     {

@@ -1,9 +1,9 @@
-﻿using Domains.Orders.DomainModels.ServiceMethods;
+﻿using Domains.Ordering.DomainModels.ServiceMethods;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Domains.Orders.Interfaces.ServiceMethods
+namespace Domains.Ordering.Interfaces.ServiceMethods
 {
     public interface IServiceMethodCommandRepository
     {

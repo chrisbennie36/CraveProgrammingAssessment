@@ -1,12 +1,10 @@
-﻿using Domains.Products.Enums;
-using System;
+﻿using Domains.Ordering.Enums.Products;
 
-namespace Domains.Products.QueryModels
+namespace Domains.Ordering.QueryModels.Products
 {
-    public class ProductQueryModel
+    public class ProductQueryModel : BaseQueryModel
     {
-        public Guid Id { get; set; }
-        public ProductName Name { get; set; }
+        public string Name { get; set; }
         public ProductType Type { get; set; }
         public bool IsActive { get; set; }
     }

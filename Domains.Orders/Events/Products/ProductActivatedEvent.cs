@@ -1,12 +1,9 @@
-﻿using Domains.Products.Enums;
-using MediatR;
-using System;
+﻿using Domains.Ordering.Enums.Products;
 
-namespace Domains.Products.Events
+namespace Domains.Ordering.Events.Products
 {
-    public class ProductActivatedEvent : INotification
+    public class ProductActivatedEvent : BaseEvent
     {
-        public Guid Id { get; set; }
         public ProductType Type { get; set; }
     }
 }

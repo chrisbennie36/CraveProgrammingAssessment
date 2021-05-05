@@ -1,8 +1,8 @@
-﻿using Domains.Products.QueryModels;
+﻿using Domains.Ordering.QueryModels.Products;
 using MediatR;
 using System;
 
-namespace Domains.Products.Queries
+namespace Domains.Ordering.Queries.Products
 {
     public class GetProductByIdQuery : IRequest<ProductQueryModel>
     {

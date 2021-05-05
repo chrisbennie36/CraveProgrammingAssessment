@@ -1,16 +1,16 @@
-﻿using Domains.Products.Enums;
+﻿using Domains.Ordering.Enums.Products;
 
-namespace Domains.Products.DomainModels
+namespace Domains.Ordering.DomainModels.Products
 {
     public class ProductDetails
     {
-        public ProductDetails(ProductName name, ProductType type)
+        public ProductDetails(string name, ProductType type)
         {
             Name = name;
             Type = type;
         }
 
-        public ProductName Name { get; }
+        public string Name { get; }
         public ProductType Type { get; }
     }
 }

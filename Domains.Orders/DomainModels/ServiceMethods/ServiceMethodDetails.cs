@@ -1,4 +1,4 @@
-﻿namespace Domains.Orders.DomainModels.ServiceMethods
+﻿namespace Domains.Ordering.DomainModels.ServiceMethods
 {
     public class ServiceMethodDetails
     {

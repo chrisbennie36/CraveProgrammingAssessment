@@ -1,10 +1,11 @@
-using Domains.Orders.Interfaces;
-using Domains.Orders.Interfaces.ServiceMethods;
-using Domains.Orders.Repositories;
+using Domains.Ordering.Interfaces.Orders;
+using Domains.Ordering.Interfaces.Products;
+using Domains.Ordering.Interfaces.ServiceMethods;
+using Domains.Ordering.Repositories.Orders;
+using Domains.Ordering.Repositories.Products;
+using Domains.Ordering.Repositories.ServiceMethods;
+using Domains.Ordering.Validation.Orders;
 using Domains.Orders.Repositories.ServiceMethods;
-using Domains.Orders.Validation;
-using Domains.Products.Interfaces;
-using Domains.Products.Repositories;
 using FluentValidation.AspNetCore;
 using Infrastructure.EventPublisher;
 using Infrastructure.EventPublisher.Interfaces;
@@ -126,9 +127,7 @@ namespace OrderApi
             var assemblies = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll")
                                 .Select(x => Assembly.Load(AssemblyName.GetAssemblyName(x)));
 
-            return assemblies.Where(
-                a => a.FullName.Contains("Domains.Orders") || 
-                a.FullName.Contains("Domains.Products")).ToList();
+            return assemblies.Where(a => a.FullName.Contains("Domains.Ordering")).ToList();
         }
     }
 }

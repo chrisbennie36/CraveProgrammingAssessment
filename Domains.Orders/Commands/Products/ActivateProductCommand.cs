@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System;
 
-namespace Domains.Products.Commands
+namespace Domains.Ordering.Commands.Products
 {
     public class ActivateProductCommand : IRequest<Unit>
     {

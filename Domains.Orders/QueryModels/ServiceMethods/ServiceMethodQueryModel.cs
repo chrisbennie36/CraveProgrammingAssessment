@@ -1,10 +1,7 @@
-﻿using System;
-
-namespace Domains.Orders.QueryModels.ServiceMethods
+﻿namespace Domains.Ordering.QueryModels.ServiceMethods
 {
-    public class ServiceMethodQueryModel
+    public class ServiceMethodQueryModel : BaseQueryModel
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
     }
 }
