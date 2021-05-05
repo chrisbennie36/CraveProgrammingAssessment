@@ -27,9 +27,9 @@ namespace OrderingApi.Controllers
         [Route("")]
         public async Task<IActionResult> GetServiceMethods()
         {
-            var getProductsQuery = new GetServiceMethodsQuery();
+            var getServiceMethodsQuery = new GetServiceMethodsQuery();
 
-            var result = await _mediator.Send(getProductsQuery, new CancellationToken()).ConfigureAwait(false);
+            var result = await _mediator.Send(getServiceMethodsQuery, new CancellationToken()).ConfigureAwait(false);
 
             if (result == null)
                 return NotFound();
