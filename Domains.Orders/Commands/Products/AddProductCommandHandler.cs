@@ -40,7 +40,7 @@ namespace Domains.Ordering.Commands.Products
 
         private Product MapProduct(AddProductCommand command)
         {
-            var details = new ProductDetails(command.Name, command.Type);
+            var details = new ProductDetails(command.Name.ToString(), command.Type.ToString());
 
             return Product.CreateNew(details, true);
         }

@@ -2,10 +2,10 @@
 {
     public enum ProductName
     {
-        Breakfast,
-        Lunch,
-        Dinner,
-        Minibar,
+        Steak,
+        Salmon,
+        Delerium,
+        LaChouffe,
         Spa,
         SwimmingPool
     }

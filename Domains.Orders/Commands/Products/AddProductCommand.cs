@@ -6,7 +6,7 @@ namespace Domains.Ordering.Commands.Products
 {
     public class AddProductCommand : IRequest<Guid>
     {
-        public string Name { get; set; }
+        public ProductName Name { get; set; }
         public ProductType Type { get; set; }
     }
 }

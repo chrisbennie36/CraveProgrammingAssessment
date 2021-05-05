@@ -4,6 +4,6 @@
     {
         Food,
         Drink,
-        Facilties
+        Facilities
     }
 }

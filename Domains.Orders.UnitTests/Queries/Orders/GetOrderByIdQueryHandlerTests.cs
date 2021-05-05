@@ -38,7 +38,7 @@ namespace Domains.Ordering.UnitTests.Queries.Orders
 
         [Fact]
         [Trait("TestCategory", "UnitTest")]
-        public async Task HandlingGetOrderByIdQuery_RetrievesDataFromTheRepository()
+        public async Task HandlingGetOrderByIdQuery_RetrievesOrderData()
         {
             var query = new GetOrderByIdQuery { Id = Guid.NewGuid() };
 
@@ -48,6 +48,36 @@ namespace Domains.Ordering.UnitTests.Queries.Orders
 
             _orderRepository.Verify(o => o.GetOrderById(query.Id), Times.Once);
             Assert.NotNull(result);
+        }
+
+        [Fact]
+        [Trait("TestCategory", "UnitTest")]
+        public async Task HandlingGetOrderByIdQuery_RetrievesProductData()
+        {
+            var productId = Guid.NewGuid();
+
+            var query = new GetOrderByIdQuery { Id = Guid.NewGuid() };
+
+            _orderRepository.Setup(o => o.GetOrderById(query.Id)).ReturnsAsync(new OrderModel { ProductId = productId });
+
+            var result = await _handler.Handle(query, new CancellationToken()).ConfigureAwait(false);
+
+            _productRepository.Verify(o => o.GetProductById(productId), Times.Once);
+        }
+
+        [Fact]
+        [Trait("TestCategory", "UnitTest")]
+        public async Task HandlingGetOrderByIdQuery_RetrievesServiceMethodData()
+        {
+            var serviceMethodId = Guid.NewGuid();
+
+            var query = new GetOrderByIdQuery { Id = Guid.NewGuid() };
+
+            _orderRepository.Setup(o => o.GetOrderById(query.Id)).ReturnsAsync(new OrderModel { ServiceMethodId = serviceMethodId });
+
+            var result = await _handler.Handle(query, new CancellationToken()).ConfigureAwait(false);
+
+            _serviceMethodRepository.Verify(o => o.GetServiceMethodById(serviceMethodId), Times.Once);
         }
     }
 }

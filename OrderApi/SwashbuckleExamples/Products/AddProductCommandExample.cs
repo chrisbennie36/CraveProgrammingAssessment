@@ -10,9 +10,8 @@ namespace OrderingApi.SwashbuckleExamples.Products
         {
             return new AddProductCommand
             {
-                //Name = ProductName.Dinner,
-                Name = "Test",
-                Type = ProductType.Food
+                Name = ProductName.Delerium,
+                Type = ProductType.Drink
             };
         }
     }

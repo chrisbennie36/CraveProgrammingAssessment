@@ -109,8 +109,8 @@ namespace Domains.Ordering.Repositories.Products
             var entity = new ProductEntity
             {
                 Id = @event.Id,
-                Name = @event.Name,
-                Type = @event.Type,
+                Name = @event.Name.ToString(),
+                Type = @event.Type.ToString(),
                 PartitionKey = @event.Type.ToString(),
                 RowKey = @event.Id.ToString(),
                 Timestamp = DateTime.UtcNow,
