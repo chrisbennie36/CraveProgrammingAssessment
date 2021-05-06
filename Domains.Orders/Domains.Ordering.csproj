@@ -15,7 +15,6 @@
     <ProjectReference Include="..\Infrastructure.EventPublisher\Infrastructure.EventPublisher.csproj" />
     <ProjectReference Include="..\Infrastructure.Sql\Infrastructure.Sql.csproj" />
     <ProjectReference Include="..\Infrastructure.TableStorage\Infrastructure.TableStorage.csproj" />
-    <ProjectReference Include="..\Infrastrucure.Exceptions\Infrastrucure.Exceptions.csproj" />
     <ProjectReference Include="..\Logger\Infrastructure.Logging.csproj" />
   </ItemGroup>
 

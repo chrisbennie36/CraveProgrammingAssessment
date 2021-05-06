@@ -18,10 +18,10 @@ namespace Domains.Ordering.Validation.Orders
             _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
             _serviceMethodRepository = serviceMethodRepository ?? throw new ArgumentNullException(nameof(serviceMethodRepository));
 
-            RuleFor(itm => itm).MustAsync(async (o, cancellation) => await ProductExists(o.ProductId).ConfigureAwait(false)).WithMessage("Ordered Product does not exist");
+            RuleFor(itm => itm).MustAsync(async (o, cancellation) => await ProductExists(o.ProductId).ConfigureAwait(false)).WithMessage(ErrorMessages.OrderedProductDoesNotExist);
             RuleFor(itm => itm).MustAsync(async (o, cancellation) => await ProductAvailable(o.ProductId).ConfigureAwait(false))
-                .When(itm => ProductExists(itm.ProductId).Result == true).WithMessage("Ordered Product is not currently available");
-            RuleFor(itm => itm).MustAsync(async (o, cancellation) => await ServiceMethodExists(o.ServiceMethodId).ConfigureAwait(false)).WithMessage("Ordered Service Method does not exist");
+                .When(itm => ProductExists(itm.ProductId).Result == true).WithMessage(ErrorMessages.OrdredProductIsNotAvailable);
+            RuleFor(itm => itm).MustAsync(async (o, cancellation) => await ServiceMethodExists(o.ServiceMethodId).ConfigureAwait(false)).WithMessage(ErrorMessages.OrderedServiceMethodDoesNotExist);
         }
 
         private async Task<bool> ProductExists(Guid productId)

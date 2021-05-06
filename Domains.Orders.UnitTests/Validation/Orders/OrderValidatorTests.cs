@@ -5,6 +5,7 @@ using Domains.Ordering.Validation.Orders;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace Domains.Ordering.UnitTests.Validation.Orders
@@ -36,6 +37,7 @@ namespace Domains.Ordering.UnitTests.Validation.Orders
 
             Assert.False(result.IsValid);
             Assert.Single(result.Errors);
+            Assert.Equal(ErrorMessages.OrderedProductDoesNotExist, result.Errors.Single().ErrorMessage);
         }
 
         [Fact]
@@ -51,6 +53,7 @@ namespace Domains.Ordering.UnitTests.Validation.Orders
 
             Assert.False(result.IsValid);
             Assert.Single(result.Errors);
+            Assert.Equal(ErrorMessages.OrdredProductIsNotAvailable, result.Errors.Single().ErrorMessage);
         }
 
         [Fact]
@@ -65,6 +68,7 @@ namespace Domains.Ordering.UnitTests.Validation.Orders
 
             Assert.False(result.IsValid);
             Assert.Single(result.Errors);
+            Assert.Equal(ErrorMessages.OrderedServiceMethodDoesNotExist, result.Errors.Single().ErrorMessage);
         }
     }
 }

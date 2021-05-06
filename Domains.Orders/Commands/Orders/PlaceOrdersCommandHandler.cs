@@ -2,7 +2,6 @@
 using Domains.Ordering.Dtos.Orders;
 using Domains.Ordering.Interfaces.Orders;
 using Infrastructure.EventPublisher.Interfaces;
-using Infrastrucure.Exceptions;
 using Logging.Interfaces;
 using MediatR;
 using System;
@@ -30,11 +29,6 @@ namespace Domains.Ordering.Commands.Orders
             _logger.Debug("Handling PlaceOrdersCommand");
 
             var orderIds = new List<Guid>();
-
-            if (request.CustomerDetails == null)
-            {
-                throw new CustomerDetailsMissingException("No Customer details supplied in the PlaceOrdersCommand");
-            }
 
             foreach (var orderDto in request.Orders)
             {

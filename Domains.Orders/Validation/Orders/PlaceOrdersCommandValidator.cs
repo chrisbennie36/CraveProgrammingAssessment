@@ -16,6 +16,8 @@ namespace Domains.Ordering.Validation.Orders
             _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
             _serviceMethodRepository = serviceMethodRepository ?? throw new ArgumentNullException(nameof(serviceMethodRepository));
 
+            RuleFor(itm => itm.CustomerDetails).NotNull().WithMessage(ErrorMessages.NoCustomerDataSupplied);
+            RuleFor(itm => itm.CustomerDetails.Name).NotEmpty().When(itm => itm.CustomerDetails != null).WithErrorCode(ErrorMessages.NoCustomerNameSupplied);
             RuleForEach(itm => itm.Orders).SetValidator(new OrderValidator(_productRepository, _serviceMethodRepository));
         }
     }
