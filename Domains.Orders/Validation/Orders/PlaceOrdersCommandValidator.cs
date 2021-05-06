@@ -3,6 +3,7 @@ using Domains.Ordering.Interfaces.Products;
 using Domains.Ordering.Interfaces.ServiceMethods;
 using FluentValidation;
 using System;
+using System.Threading;
 
 namespace Domains.Ordering.Validation.Orders
 {
@@ -19,6 +20,8 @@ namespace Domains.Ordering.Validation.Orders
             RuleFor(itm => itm.CustomerDetails).NotNull().WithMessage(ErrorMessages.NoCustomerDataSupplied);
             RuleFor(itm => itm.CustomerDetails.Name).NotEmpty().When(itm => itm.CustomerDetails != null).WithErrorCode(ErrorMessages.NoCustomerNameSupplied);
             RuleForEach(itm => itm.Orders).SetValidator(new OrderValidator(_productRepository, _serviceMethodRepository));
+
+            Thread.Sleep(5000);
         }
     }
 }
